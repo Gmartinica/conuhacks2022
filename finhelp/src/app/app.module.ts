@@ -6,11 +6,15 @@ import { AppComponent } from './app.component';
 import { InfoFormComponent } from './info-form/info-form.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InfoFormComponent
+    InfoFormComponent,
+    ErrorPageComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
