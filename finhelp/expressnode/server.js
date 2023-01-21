@@ -1,57 +1,56 @@
-var express = require("express");
+var express = require('express');
 var app = express();
 
-const request = require("request");
-const port = 3000;
+app.get('/index.html', function(req, res){
+  res.sendFile( __dirname + "/" + "index.htm1" );
+})
 
-app.get("/index.html", function (req, res) {
-  var country = "Canada";
-  request.get(
-    {
-      url: "https://api.api-ninjas.com/v1/inflation?country=" + country,
-      headers: {
-        "X-Api-Key": "gH1d46svlkK7aN2rj05loQ==thrwUmwQcL4CIaCc",
-      },
-    },
-    function (error, response, body) {
-      console.log(JSON.parse(body)[0]);
-      const inflation = JSON.parse(body)[0].yearly_rate_pct;
-      if (error) return console.error("Request failed:", error);
-      else if (response.statusCode != 200)
-        return console.error(
-          "Error:",
-          response.statusCode,
-          body.toString("utf8")
-        );
-      else res.send(`<h1>${inflation}<h1>`);
-    }
-  );
-});
-
-app.post("/", function (req, res) {
+app.get('/create',function(req, res)
+{
   response = {
-    firstName: req.query.firstName,
+    firstName:req.query.firstName,
 
-    lastName: req.query.lastName,
+    lastName:req.query.lastName,
 
-    hourlyIncome: req.query.hourlyIncome,
+    hourlyIncome:req.query.hourlyIncome,
 
-    weeklyHours: req.query.weeklyHours,
+    weeklyHours:req.query.weeklyHours,
 
-    savings: req.query.savings,
+    savings:req.query.savings,
 
-    loan: {
-      credit: req.query.creditLoan,
+    loan:{
+      credit:req.query.creditLoan,
 
-      student: req.query.studentLoan,
+      creditInterestRate:req.query.creditInterestRate,
 
-      subscriptions: req.query.subscriptions,
-    },
+
+      studentLoan:req.query.studentLoan,
+
+      studentLoanInterestRate: req.query.studentLoanInterestRate,
+
+      subscriptions:req.query.subscriptions
+
+    }
   };
   console.log(response);
   res.end(JSON.stringify(response));
-});
+})
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+function getStudentLoanInterest(total,interestRate){
+  var dailyInterestRate = interestRate / 365;
+  var dailyInterestCharge = dailyInterestRate * total
+  return dailyInterestCharge * 365
+}
+function getCompoundInterest(principal, creditInterestRate, creditYears){
+  return principal*((1+creditInterestRate)**creditYears - 1)
+}
+
+function yearlyCost(hourlyIncome,weeklyHours,savings,creditLoan,creditInterestRate,studentLoan,studentLoanInterestRate,subscriptions) {
+
+  var futureSavings = savings + (hourlyIncome*weeklyHours*52);
+
+  var comInterest = getCompoundInterest(creditLoan,creditInterestRate)
+  var studentInterest = getStudentLoanInterest(studentLoan,studentLoanInterestRate)
+  var totalExpenses = comInterest + studentInterest + subscriptions;
+  return (futureSavings - totalExpenses) / totalEarnings
+}
