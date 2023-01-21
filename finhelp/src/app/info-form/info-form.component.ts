@@ -1,7 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
-import { FormService } from '../form.service';
+import { Observable } from 'rxjs';
+import { FormService, userInputs } from '../form.service';
 
 @Component({
   selector: 'app-info-form',
@@ -11,7 +13,7 @@ import { FormService } from '../form.service';
 export class InfoFormComponent implements OnInit {
   //TODO add , private service: FormService
   // but it gives an error for now
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private http_client: HttpClient) { }
   
 
 
@@ -29,9 +31,13 @@ export class InfoFormComponent implements OnInit {
   });
 
 
+  onSubmit(){
+    this.Validate(this.userForm.value);
+  }
 
- Achete() { //TODO change this to the post function in the service
-    console.log(this.userForm.value); 
- }
+//TODO change this to the post function in the service
+ Validate(data: any): Observable<any> {
+  return this.http_client.post('/', data);
+}
 
 }

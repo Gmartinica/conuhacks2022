@@ -1,6 +1,6 @@
 <!-- a form that will take in information about the user -->
 
-<form [formGroup]="userForm" (ngSubmit)="Achete()" novalidate class="col-3 mx-auto border border-danger border-3 rounded-5 p-4 mt-5 ">
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" novalidate class="col-3 mx-auto border border-danger border-3 rounded-5 p-4 mt-5 ">
 
     <label for="firstName">First Name</label>
     <input type="text" id="firstName"  placeholder="John" class="form-control" formControlName="firstName">
@@ -39,6 +39,6 @@
     </div>
 
     <div class="row">
-        <button [disabled]="!userForm.valid" id="validate"  routerLink="/stats" class="btn btn-outline-primary mt-3" (click)="Achete()">Validate!</button>
+        <button [disabled]="!userForm.valid" id="validate"  routerLink="/stats" class="btn btn-outline-primary mt-3">Validate!</button>
     </div>
 </form>
