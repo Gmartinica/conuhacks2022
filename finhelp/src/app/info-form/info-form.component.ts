@@ -9,8 +9,9 @@ import { FormService } from '../form.service';
   styleUrls: ['./info-form.component.css']
 })
 export class InfoFormComponent implements OnInit {
-  
-  constructor(private formBuilder: FormBuilder, private service: FormService) { }
+  //TODO add , private service: FormService
+  // but it gives an error for now
+  constructor(private formBuilder: FormBuilder) { }
   
 
 

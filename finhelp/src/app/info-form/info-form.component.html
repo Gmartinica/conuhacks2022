@@ -2,43 +2,43 @@
 
 <form [formGroup]="userForm" (ngSubmit)="Achete()" novalidate class="col-3 mx-auto border border-danger border-3 rounded-5 p-4 mt-5 ">
 
-    <label for="prenom">firstName</label>
+    <label for="firstName">First Name</label>
     <input type="text" id="firstName"  placeholder="John" class="form-control" formControlName="firstName">
     <div *ngIf="userForm.controls['firstName'].invalid && (userForm.controls['firstName'].dirty || userForm.controls['firstName'].touched)" class="alert">
         prenom ne peut pas etre vide
     </div>
 
-    <label for="nom">lastName</label>
+    <label for="lastName">Last Name</label>
     <input type="text" id="lastName" placeholder="Smith"  class="form-control" formControlName="lastName">
     <div *ngIf="userForm.controls['lastName'].invalid && (userForm.controls['lastName'].dirty || userForm.controls['lastName'].touched)" class="alert">
         nom ne peut pas etre vide
     </div>
 
-    <label for="courriel">hourlyIncome</label>
+    <label for="hourlyIncome">Hourly Income</label>
     <input type="text" id="hourlyIncome"   placeholder="jm@acme.com" class="form-control" formControlName="hourlyIncome">
     <div *ngIf="userForm.controls['hourlyIncome'].invalid && (userForm.controls['hourlyIncome'].dirty || userForm.controls['hourlyIncome'].touched)" class="alert">
         courriel n'est pas valide
     </div>
     
-    <label for="adresse">weeklyHours</label>
+    <label for="weeklyHours">Hours Worked Per Week</label>
     <input type="text" id="weeklyHours"  placeholder="1 rang de l'avenant" class="form-control" formControlName="weeklyHours">
     <div *ngIf="userForm.controls['weeklyHours'].invalid && (userForm.controls['weeklyHours'].dirty || userForm.controls['weeklyHours'].touched)" class="alert">
         Adresse n'est pas valide
     </div>
 
-    <label for="adresse">savings</label>
+    <label for="savings">Current Amount In Savings</label>
     <input type="text" id="savings"  placeholder="1 rang de l'avenant" class="form-control" formControlName="savings">
     <div *ngIf="userForm.controls['savings'].invalid && (userForm.controls['savings'].dirty || userForm.controls['savings'].touched)" class="alert">
         Adresse n'est pas valide
     </div>
 
-    <label for="adresse">loan</label>
+    <label for="loan">Current Amount Loaned</label>
     <input type="text" id="loan"  placeholder="1 rang de l'avenant" class="form-control" formControlName="loan">
     <div *ngIf="userForm.controls['loan'].invalid && (userForm.controls['loan'].dirty || userForm.controls['loan'].touched)" class="alert">
         Adresse n'est pas valide
     </div>
 
     <div class="row">
-        <button [disabled]="!userForm.valid" id="acheter"  routerLink="/transactions" class="btn btn-outline-primary mt-3" (click)="Achete()">Acheter</button>
+        <button [disabled]="!userForm.valid" id="validate"  routerLink="/stats" class="btn btn-outline-primary mt-3" (click)="Achete()">Validate!</button>
     </div>
 </form>
