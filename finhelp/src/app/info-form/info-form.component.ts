@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
+import { FormService } from '../form.service';
 
 @Component({
   selector: 'app-info-form',
@@ -9,13 +10,15 @@ import { FormBuilder } from '@angular/forms';
 })
 export class InfoFormComponent implements OnInit {
   
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private service: FormService) { }
   
+
+
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    
   }
 
-  achatForm = this.formBuilder.group({
+  userForm = this.formBuilder.group({
     firstName: ['', [Validators.required]],
     lastName: ['', [Validators.required]],
     hourlyIncome: ['', [Validators.required]],
@@ -24,8 +27,10 @@ export class InfoFormComponent implements OnInit {
     loan: ['', [Validators.required]],  
   });
 
- Achete() {
-    console.log(this.achatForm.value);
+
+
+ Achete() { //TODO change this to the post function in the service
+    console.log(this.userForm.value); 
  }
 
 }

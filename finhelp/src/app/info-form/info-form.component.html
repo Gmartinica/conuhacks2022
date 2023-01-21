@@ -1,44 +1,44 @@
 <!-- a form that will take in information about the user -->
 
-<form [formGroup]="achatForm" (ngSubmit)="Achete()" novalidate class="col-3 mx-auto border border-danger border-3 rounded-5 p-4 mt-5 ">
+<form [formGroup]="userForm" (ngSubmit)="Achete()" novalidate class="col-3 mx-auto border border-danger border-3 rounded-5 p-4 mt-5 ">
 
-    <label for="prenom">firstNAme</label>
-    <input type="text" id="firstName"  placeholder="John" class="form-control" formControlName="prenom">
-    <div *ngIf="achatForm.controls['firstName'].invalid && (achatForm.controls['firstName'].dirty || achatForm.controls['firstName'].touched)" class="alert">
+    <label for="prenom">firstName</label>
+    <input type="text" id="firstName"  placeholder="John" class="form-control" formControlName="firstName">
+    <div *ngIf="userForm.controls['firstName'].invalid && (userForm.controls['firstName'].dirty || userForm.controls['firstName'].touched)" class="alert">
         prenom ne peut pas etre vide
     </div>
 
     <label for="nom">lastName</label>
-    <input type="text" id="lastName" placeholder="Smith"  class="form-control" formControlName="nom">
-    <div *ngIf="achatForm.controls['lastName'].invalid && (achatForm.controls['lastName'].dirty || achatForm.controls['lastName'].touched)" class="alert">
+    <input type="text" id="lastName" placeholder="Smith"  class="form-control" formControlName="lastName">
+    <div *ngIf="userForm.controls['lastName'].invalid && (userForm.controls['lastName'].dirty || userForm.controls['lastName'].touched)" class="alert">
         nom ne peut pas etre vide
     </div>
 
     <label for="courriel">hourlyIncome</label>
-    <input type="text" id="hourlyIncome"   placeholder="jm@acme.com" class="form-control" formControlName="courriel">
-    <div *ngIf="achatForm.controls['hourlyIncome'].invalid && (achatForm.controls['hourlyIncome'].dirty || achatForm.controls['hourlyIncome'].touched)" class="alert">
+    <input type="text" id="hourlyIncome"   placeholder="jm@acme.com" class="form-control" formControlName="hourlyIncome">
+    <div *ngIf="userForm.controls['hourlyIncome'].invalid && (userForm.controls['hourlyIncome'].dirty || userForm.controls['hourlyIncome'].touched)" class="alert">
         courriel n'est pas valide
     </div>
     
     <label for="adresse">weeklyHours</label>
-    <input type="text" id="weeklyHours"  placeholder="1 rang de l'avenant" class="form-control" formControlName="adresse">
-    <div *ngIf="achatForm.controls['weeklyHours'].invalid && (achatForm.controls['weeklyHours'].dirty || achatForm.controls['weeklyHours'].touched)" class="alert">
+    <input type="text" id="weeklyHours"  placeholder="1 rang de l'avenant" class="form-control" formControlName="weeklyHours">
+    <div *ngIf="userForm.controls['weeklyHours'].invalid && (userForm.controls['weeklyHours'].dirty || userForm.controls['weeklyHours'].touched)" class="alert">
         Adresse n'est pas valide
     </div>
 
     <label for="adresse">savings</label>
-    <input type="text" id="savings"  placeholder="1 rang de l'avenant" class="form-control" formControlName="adresse">
-    <div *ngIf="achatForm.controls['savings'].invalid && (achatForm.controls['savings'].dirty || achatForm.controls['savings'].touched)" class="alert">
+    <input type="text" id="savings"  placeholder="1 rang de l'avenant" class="form-control" formControlName="savings">
+    <div *ngIf="userForm.controls['savings'].invalid && (userForm.controls['savings'].dirty || userForm.controls['savings'].touched)" class="alert">
         Adresse n'est pas valide
     </div>
 
     <label for="adresse">loan</label>
-    <input type="text" id="loan"  placeholder="1 rang de l'avenant" class="form-control" formControlName="adresse">
-    <div *ngIf="achatForm.controls['loan'].invalid && (achatForm.controls['loan'].dirty || achatForm.controls['loan'].touched)" class="alert">
+    <input type="text" id="loan"  placeholder="1 rang de l'avenant" class="form-control" formControlName="loan">
+    <div *ngIf="userForm.controls['loan'].invalid && (userForm.controls['loan'].dirty || userForm.controls['loan'].touched)" class="alert">
         Adresse n'est pas valide
     </div>
 
     <div class="row">
-        <button [disabled]="!achatForm.valid" id="acheter"  routerLink="/transactions" class="btn btn-outline-primary mt-3" (click)="Achete()">Acheter</button>
+        <button [disabled]="!userForm.valid" id="acheter"  routerLink="/transactions" class="btn btn-outline-primary mt-3" (click)="Achete()">Acheter</button>
     </div>
 </form>
