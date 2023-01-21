@@ -39,6 +39,6 @@
     </div>
 
     <div class="row">
-        <button [disabled]="!userForm.valid" id="validate"  routerLink="/stats" class="btn btn-outline-primary mt-3">Validate!</button>
+        <button [disabled]="!userForm.valid" id="validate"  routerLink="/stats" (click)="onSubmit()" class="btn btn-outline-primary mt-3">Validate!</button>
     </div>
 </form>

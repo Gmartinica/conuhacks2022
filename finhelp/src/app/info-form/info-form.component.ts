@@ -32,6 +32,7 @@ export class InfoFormComponent implements OnInit {
 
 
   onSubmit(){
+    console.log(this.userForm.value);
     this.Validate(this.userForm.value);
   }
 
