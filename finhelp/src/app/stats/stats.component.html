@@ -1,1 +1,24 @@
-<p>stats works!</p>
+
+
+<div class="m-5" *ngIf="pageType == 0">
+
+<div  [style.--color]="percentages" id="my-pie-chart"></div>
+<p [style.color]="'blue'">Wants: {{wants}}$</p>
+<p [style.color]="'orange'">Needs: {{needs}}$</p>
+<p [style.color]="'pink'">Savings: {{savings}}$</p>
+
+This chart shows us how you should be seperating your budget.
+The general rule is <i>50%</i> of your income should go to wants, <i>30%</i> to needs, and <i>20%</i> to savings.
+
+</div>
+
+<div *ngIf="pageType == 1">
+
+    
+</div>
+
+<div *ngIf="pageType == 2">
+
+    
+</div>
+

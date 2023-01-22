@@ -37,8 +37,13 @@ export class InfoFormComponent implements OnInit {
   }
 
 //TODO change this to the post function in the service, but i wont cuz im lazy
- Validate(data: any): Observable<any> {
-  return this.http_client.post<any>('http://localhost:3000/create', data);
+ Validate(data: any) {
+  console.log(data)
+  return this.http_client.post('http://localhost:3000/create', data).subscribe((data) => {
+    console.log(data);
+    return data;
+  });
+  
 }
 
 }
