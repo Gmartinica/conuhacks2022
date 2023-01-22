@@ -43,45 +43,39 @@ app.get("/create", function (req, res) {
 app.post("/create", function (req, res) {
   console.log(req.body);
   user = {
-    name: req.query.name,
+    firstName:req.body.firstName,
 
-    firstName:req.query.firstName,
 
-    lastName:req.query.lastName,
+    lastName:req.body.lastName,
 
-    hourlyIncome:req.query.hourlyIncome,
+    hourlyIncome:req.body.hourlyIncome,
 
-    weeklyHours:req.query.weeklyHours,
+    weeklyHours:req.body.weeklyHours,
 
-    savings:req.query.savings,
+    savings:req.body.savings,
 
-    debt: req.query.debt,
+    debt: req.body.debt,
 
-    expenses: req.query.expenses
+    expenses: req.body.expenses
   };
   const income = 4 * user.hourlyIncome * user.weeklyHours;
+  console.log(user.hourlyIncome)
+  console.log(user.weeklyHours)
 
-  ratio = user.debt / (user.savings + income);
+  ratio = (user.savings + income)*100/(user.debt)
+  console.log(ratio)
   result = '';
-  switch (ratio) {
-    case ratio <= 0.25:
+  if (ratio <= 0.25)
       result = 0
-      break;
-    case ratio <= 0.50 && ratio > 0.25:
-      result = 1
-      break;
-    case ratio <= 0.75 && ratio > 0.50:
-      result = 2
-      break;
-    case ratio <= 0.1 && ratio > 0.75:
-      result = 3
-      break;
-    default:
-      result = 0;
-      break;
-  }
+  if (ratio <= 0.50 && ratio > 0.25)
+    result = 1
+  if (ratio <= 0.75 && ratio > 0.50)
+    result = 2
+  if (ratio > 0.75)
+    result = 3
+  console.log(result)
 
-  res.send(JSON.stringify({res:result}));
+  res.send(result.toString());
 });
 
 app.post("/a", function (req, res) {
