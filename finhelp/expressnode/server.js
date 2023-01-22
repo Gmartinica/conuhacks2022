@@ -3,9 +3,11 @@ var app = express();
 
 const request = require("request");
 var bodyParser = require('body-parser');
-const port = 3000;
-app.use(bodyParser.urlencoded({extended : true}));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(bodyParser.json());
+const port = 3000;
 
 app.get("/index.html", function (req, res) {
   var country = "Canada";
@@ -73,7 +75,13 @@ app.post("/create", function (req, res) {
       break;
   }
 
-  res.end(result);
+  res.send(JSON.stringify({res:result}));
+});
+
+app.post("/a", function (req, res) {
+  console.log(req.body);
+  res.end('ok')
+  //console.log(req);
 });
 
 app.listen(port, () => {
