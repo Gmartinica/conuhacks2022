@@ -11,7 +11,7 @@ export class StatsComponent {
 
   constructor(private http_client: HttpClient) { }
 
-  pageType = 0;
+  pageType = this.Validate();
 
   //50% needs 30% wants 20% savings
 
@@ -26,9 +26,9 @@ export class StatsComponent {
 percentages = "conic-gradient(blue 1% " + 30 + "%, pink 1% " + 50 + "%, orange 1% " + 20 + "%)"
 
 
-  Validate(): any {
-     this.http_client.get<number>('http://localhost:3000/create').pipe(tap({next: (data) => {return data}}))
-  }
+Validate(): any {
+  this.http_client.get<number>('http://localhost:3000/create').pipe(tap({next: (data) => {return data}}))
+}
 
 }
  
