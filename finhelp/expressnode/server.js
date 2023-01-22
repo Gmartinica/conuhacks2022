@@ -1,4 +1,4 @@
-var express = require("express");
+var express = require('express');
 var app = express();
 var cors = require("cors");
 
@@ -45,11 +45,18 @@ app.post("/create", function (req, res) {
   user = {
     name: req.query.name,
 
-    hourlyIncome: req.query.hourlyIncome,
+app.get('/create',function(req, res)
+{
+  response = {
+    firstName:req.query.firstName,
 
-    weeklyHours: req.query.weeklyHours,
+    lastName:req.query.lastName,
 
-    savings: req.query.savings,
+    hourlyIncome:req.query.hourlyIncome,
+
+    weeklyHours:req.query.weeklyHours,
+
+    savings:req.query.savings,
 
     debt: req.query.debt,
 
