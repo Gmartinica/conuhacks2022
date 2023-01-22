@@ -2,7 +2,10 @@ var express = require("express");
 var app = express();
 
 const request = require("request");
+var bodyParser = require('body-parser');
 const port = 3000;
+app.use(bodyParser.urlencoded({extended : true}));
+app.use(bodyParser.json());
 
 app.get("/index.html", function (req, res) {
   var country = "Canada";
@@ -29,16 +32,14 @@ app.get("/index.html", function (req, res) {
 });
 
 app.get("/create", function (req, res) {
-  console.log('req');
+  console.log(req.query);
+  //console.log(req);
 });
 
 app.post("/create", function (req, res) {
-
   console.log(req.body);
-  response = {
-    firstName: req.query.firstName,
-
-    lastName: req.query.lastName,
+  user = {
+    name: req.query.name,
 
     hourlyIncome: req.query.hourlyIncome,
 
@@ -46,16 +47,33 @@ app.post("/create", function (req, res) {
 
     savings: req.query.savings,
 
-    loan: {
-      credit: req.query.creditLoan,
+    debt: req.query.debt,
 
-      student: req.query.studentLoan,
-
-      subscriptions: req.query.subscriptions,
-    },
+    expenses: req.query.expenses
   };
-  console.log(response);
-  res.end(JSON.stringify(response));
+  const income = 4 * user.hourlyIncome * user.weeklyHours;
+
+  ratio = user.debt / (user.savings + income);
+  result = '';
+  switch (ratio) {
+    case ratio <= 0.25:
+      result = 0
+      break;
+    case ratio <= 0.50 && ratio > 0.25:
+      result = 1
+      break;
+    case ratio <= 0.75 && ratio > 0.50:
+      result = 2
+      break;
+    case ratio <= 0.1 && ratio > 0.75:
+      result = 3
+      break;
+    default:
+      result = 0;
+      break;
+  }
+
+  res.end(result);
 });
 
 app.listen(port, () => {
