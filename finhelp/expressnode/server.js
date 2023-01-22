@@ -54,7 +54,7 @@ app.post("/create", function (req, res) {
 
     savings:req.body.savings,
 
-    debt: req.body.debt,
+    debt: req.body.loan,
 
     expenses: req.body.expenses
   };
