@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+const port = 3000;
 
 app.get('/index.html', function(req, res){
   res.sendFile( __dirname + "/" + "index.htm1" );
@@ -55,3 +56,7 @@ function yearlyCost(hourlyIncome,weeklyHours,savings,creditLoan,creditInterestRa
   var totalExpenses = comInterest + studentInterest + subscriptions;
   return (futureSavings - totalExpenses) / totalEarnings
 }
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
