@@ -12,12 +12,8 @@ export class WebRequestService {
     this.ROOT_URL = 'http://localhost:3000';
    }
 
-  test() {
-    return this.http.get(this.ROOT_URL, {responseType: 'text'});
-  }
-
   get(uri: string) {
-    return this.http.get(`${this.ROOT_URL}/${uri}`);
+    return this.http.get(`${this.ROOT_URL}/${uri}`, {responseType: 'text'});
   }
 
   post(uri: string, payload: Object) {

@@ -9,9 +9,8 @@ export class UserService {
   constructor(private webRequestService: WebRequestService) { }
 
   // this.webRequestService.patch('', null);
-  
-  test() {
-    console.log("Testing...");
-    return this.webRequestService.test();
+
+  getUser() {
+    return this.webRequestService.get('username');
   }
 }

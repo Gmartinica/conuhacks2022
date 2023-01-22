@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorComponent } from './error/error.component';
 import { InfoFormComponent } from './info-form/info-form.component';
 import { AuthButtonComponent } from './auth-button/auth-button.component';
+import { StatsComponent } from './stats/stats.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { AuthButtonComponent } from './auth-button/auth-button.component';
     HomeComponent,
     ErrorComponent,
     InfoFormComponent,
-    AuthButtonComponent
+    AuthButtonComponent,
+    StatsComponent
   ],
   imports: [
     BrowserModule,

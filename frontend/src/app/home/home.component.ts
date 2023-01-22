@@ -1,6 +1,19 @@
-
 import { AuthService } from '@auth0/auth0-angular';
 import { Component } from '@angular/core';
+import { UserService } from '../services/user.service';
+
+// let metadata = {
+//     "age": 18,
+//     "hourlyIncome": 14.25,
+//     "weeklyHours": 20,
+//     "checking": 200,
+//     "savings": 700,
+//     "loans": {
+//       "credit": 100,
+//       "student": 1000,
+//       "subscriptions": 50
+//     }
+// }
 
 @Component({
   selector: 'app-home',
@@ -8,5 +21,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  constructor(public auth: AuthService) {}
+  constructor(public auth: AuthService, private userService: UserService) {}
+
+  ngOnInit(): void {
+    this.userService.getUser().subscribe((res: any) => {
+        console.log(res);
+    });
+  }
 }

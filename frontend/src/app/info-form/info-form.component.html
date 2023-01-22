@@ -1,1 +1,34 @@
-<p>info-form works!</p>
+<!-- a form that will take in information about the user -->
+
+<span class="display-4" *ngIf="auth.user$ | async as user">Welcome {{ user.name }}</span>
+
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" novalidate class="col-3 mx-auto border border-danger border-3 rounded-5 p-4 mt-5 ">
+
+    <label for="hourlyIncome">Hourly Income</label>
+    <input type="text" id="hourlyIncome"   placeholder="jm@acme.com" class="form-control" formControlName="hourlyIncome">
+    <div *ngIf="userForm.controls['hourlyIncome'].invalid && (userForm.controls['hourlyIncome'].dirty || userForm.controls['hourlyIncome'].touched)" class="alert">
+        courriel n'est pas valide
+    </div>
+    
+    <label for="weeklyHours">Hours Worked Per Week</label>
+    <input type="text" id="weeklyHours"  placeholder="1 rang de l'avenant" class="form-control" formControlName="weeklyHours">
+    <div *ngIf="userForm.controls['weeklyHours'].invalid && (userForm.controls['weeklyHours'].dirty || userForm.controls['weeklyHours'].touched)" class="alert">
+        Adresse n'est pas valide
+    </div>
+
+    <label for="savings">Current Amount In Savings</label>
+    <input type="text" id="savings"  placeholder="1 rang de l'avenant" class="form-control" formControlName="savings">
+    <div *ngIf="userForm.controls['savings'].invalid && (userForm.controls['savings'].dirty || userForm.controls['savings'].touched)" class="alert">
+        Adresse n'est pas valide
+    </div>
+
+    <label for="loan">Current Amount Loaned</label>
+    <input type="text" id="loan"  placeholder="1 rang de l'avenant" class="form-control" formControlName="loan">
+    <div *ngIf="userForm.controls['loan'].invalid && (userForm.controls['loan'].dirty || userForm.controls['loan'].touched)" class="alert">
+        Adresse n'est pas valide
+    </div>
+
+    <div class="row">
+        <button [disabled]="!userForm.valid" id="validate"  routerLink="/stats" (click)="onSubmit()" class="btn btn-outline-primary mt-3">Validate!</button>
+    </div>
+</form>

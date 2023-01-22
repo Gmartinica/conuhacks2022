@@ -23,10 +23,13 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
-  });
+});
+
+app.get('/username', (req, res) => {
+    res.send("Artem");
+});
 
 app.get('/user', (req, res) => {
-    res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
     var userID = req.oidc.user.sub;
     var options = { method: 'GET',
         url: 'https://dev-xdt1fatydo2dxxcl.us.auth0.com/api/v2/users/' + userID,
@@ -36,26 +39,18 @@ app.get('/user', (req, res) => {
         }
     };
     axios.request(options).then(function (response) {
-        return (response.data);
+        res.send(response.data);
     }).catch(function (error) {
         console.error(error);
-        return null
+        res.send({})
     });
-});
-
-app.listen(port, () => {
-    console.log(`Server is listening on port ${port}`);
 });
 
 // const { requiresAuth } = require('express-openid-connect');
 // app.patch('/patch', requiresAuth(), (req, res) => {
-//     res.send(JSON.stringify(req.oidc.user));
-// });
-
-// app.get('/profile', requiresAuth(), (req, res) => {
-//     res.send(JSON.stringify(req.oidc.user));
-// });
-
-app.get("/", (req, res) => {
-    res.send("Hello World");
+    //     res.send(JSON.stringify(req.oidc.user));
+    // });
+    
+app.listen(port, () => {
+    console.log(`Server is listening on port ${port}`);
 });
