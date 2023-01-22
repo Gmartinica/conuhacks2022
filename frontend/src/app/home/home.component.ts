@@ -21,11 +21,13 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  constructor(public auth: AuthService, private userService: UserService) {}
 
-  ngOnInit(): void {
+  constructor(public auth: AuthService, private userService: UserService) {
+  }
+
+  getUsername() {
     this.userService.getUser().subscribe((res: any) => {
-        console.log(res);
+        return res;
     });
   }
 }

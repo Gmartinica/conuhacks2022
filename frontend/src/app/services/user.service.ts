@@ -11,6 +11,6 @@ export class UserService {
   // this.webRequestService.patch('', null);
 
   getUser() {
-    return this.webRequestService.get('username');
+    return this.webRequestService.get('user');
   }
 }
