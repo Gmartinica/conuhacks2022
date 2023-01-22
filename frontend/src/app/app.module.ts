@@ -8,13 +8,15 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorComponent } from './error/error.component';
 import { InfoFormComponent } from './info-form/info-form.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ErrorComponent,
-    InfoFormComponent
+    InfoFormComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
