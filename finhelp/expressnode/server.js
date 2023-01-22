@@ -1,9 +1,49 @@
 var express = require('express');
 var app = express();
+var cors = require("cors");
 
-app.get('/index.html', function(req, res){
-  res.sendFile( __dirname + "/" + "index.htm1" );
-})
+const request = require("request");
+var bodyParser = require('body-parser');
+app.use(cors());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
+const port = 3000;
+
+app.get("/index.html", function (req, res) {
+  var country = "Canada";
+  request.get(
+    {
+      url: "https://api.api-ninjas.com/v1/inflation?country=" + country,
+      headers: {
+        "X-Api-Key": "gH1d46svlkK7aN2rj05loQ==thrwUmwQcL4CIaCc",
+      },
+    },
+    function (error, response, body) {
+      console.log(JSON.parse(body)[0]);
+      const inflation = JSON.parse(body)[0].yearly_rate_pct;
+      if (error) return console.error("Request failed:", error);
+      else if (response.statusCode != 200)
+        return console.error(
+          "Error:",
+          response.statusCode,
+          body.toString("utf8")
+        );
+      else res.send(`<h1>${inflation}<h1>`);
+    }
+  );
+});
+
+app.get("/create", function (req, res) {
+  console.log(req.query);
+  //console.log(req);
+});
+
+app.post("/create", function (req, res) {
+  console.log(req.body);
+  user = {
+    name: req.query.name,
 
 app.get('/create',function(req, res)
 {
@@ -18,39 +58,41 @@ app.get('/create',function(req, res)
 
     savings:req.query.savings,
 
-    loan:{
-      credit:req.query.creditLoan,
+    debt: req.query.debt,
 
-      creditInterestRate:req.query.creditInterestRate,
-
-
-      studentLoan:req.query.studentLoan,
-
-      studentLoanInterestRate: req.query.studentLoanInterestRate,
-
-      subscriptions:req.query.subscriptions
-
-    }
+    expenses: req.query.expenses
   };
-  console.log(response);
-  res.end(JSON.stringify(response));
-})
+  const income = 4 * user.hourlyIncome * user.weeklyHours;
 
-function getStudentLoanInterest(total,interestRate){
-  var dailyInterestRate = interestRate / 365;
-  var dailyInterestCharge = dailyInterestRate * total
-  return dailyInterestCharge * 365
-}
-function getCompoundInterest(principal, creditInterestRate, creditYears){
-  return principal*((1+creditInterestRate)**creditYears - 1)
-}
+  ratio = user.debt / (user.savings + income);
+  result = '';
+  switch (ratio) {
+    case ratio <= 0.25:
+      result = 0
+      break;
+    case ratio <= 0.50 && ratio > 0.25:
+      result = 1
+      break;
+    case ratio <= 0.75 && ratio > 0.50:
+      result = 2
+      break;
+    case ratio <= 0.1 && ratio > 0.75:
+      result = 3
+      break;
+    default:
+      result = 0;
+      break;
+  }
 
-function yearlyCost(hourlyIncome,weeklyHours,savings,creditLoan,creditInterestRate,studentLoan,studentLoanInterestRate,subscriptions) {
+  res.send(JSON.stringify({res:result}));
+});
 
-  var futureSavings = savings + (hourlyIncome*weeklyHours*52);
+app.post("/a", function (req, res) {
+  console.log(req.body);
+  res.end('ok')
+  //console.log(req);
+});
 
-  var comInterest = getCompoundInterest(creditLoan,creditInterestRate)
-  var studentInterest = getStudentLoanInterest(studentLoan,studentLoanInterestRate)
-  var totalExpenses = comInterest + studentInterest + subscriptions;
-  return (futureSavings - totalExpenses) / totalEarnings
-}
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
