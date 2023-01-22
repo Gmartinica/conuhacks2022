@@ -36,9 +36,9 @@ export class InfoFormComponent implements OnInit {
     this.Validate(this.userForm.value);
   }
 
-//TODO change this to the post function in the service
+//TODO change this to the post function in the service, but i wont cuz im lazy
  Validate(data: any): Observable<any> {
-  return this.http_client.post('/', data);
+  return this.http_client.post<any>('http://localhost:3000/create', data);
 }
 
 }
