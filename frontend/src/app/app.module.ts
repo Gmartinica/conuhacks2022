@@ -31,7 +31,7 @@ import { StatsComponent } from './stats/stats.component';
       domain: 'https://dev-xdt1fatydo2dxxcl.us.auth0.com',
       clientId: 'TzjygdrS0AQrrtOoZFMQzdh2ZvyQC4oC',
       authorizationParams: {
-        redirect_uri: 'http://localhost:4200/'
+        redirect_uri: 'https://finhelp-74dc1.web.app/'
       }
     })
   ],

@@ -6,9 +6,13 @@ import { WebRequestService } from './web-request.service';
 })
 export class UserService {
 
-  constructor(private webRequestService: WebRequestService) { }
+  user: any;
 
-  // this.webRequestService.patch('', null);
+  constructor(private webRequestService: WebRequestService) {
+    this.getUser().subscribe((res: any) => {
+        this.user = res;
+    });
+  }
 
   getUser() {
     return this.webRequestService.get('user');

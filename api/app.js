@@ -25,33 +25,33 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.get('/user', (req, res) => {
-    res.send(req.oidc.isAuthenticated());
-    // while (!req.oidc.isAuthenticated()) {
-    //     console.log("Waiting for authentication");
-    //     sleep(1000);
-    // }
-    // var userID = req.oidc.user.sub;
-    // var options = { method: 'GET',
-    //     url: 'https://dev-xdt1fatydo2dxxcl.us.auth0.com/api/v2/users/' + userID,
-    //     headers: {
-    //         Authorization: 'Bearer ' + token,
-    //         'content-type': 'application/json'
-    //     }
-    // };
-    // axios.request(options).then(function (response) {
-    //     res.send(response.data);
-    // }).catch(function (error) {
-    //     console.error(error);
-    //     res.send({})
-    // });
+const { requiresAuth } = require('express-openid-connect');
+
+app.get('/user', requiresAuth(), (req, res) => {
+    var userID = req.oidc.user.sub;
+    var options = { method: 'GET',
+        url: 'https://dev-xdt1fatydo2dxxcl.us.auth0.com/api/v2/users/' + userID,
+        headers: {
+            Authorization: 'Bearer ' + token,
+            'content-type': 'application/json'
+        }
+    };  
+    axios.request(options).then(function (response) {
+        res.send(response.data);
+    }).catch(function (error) {
+        console.error(error);
+        res.send(null)
+    });
 });
 
-// const { requiresAuth } = require('express-openid-connect');
-// app.patch('/patch', requiresAuth(), (req, res) => {
-    //     res.send(JSON.stringify(req.oidc.user));
-    // });
-    
+// axios.patch('/user/:id', requiresAuth(), (req, res))
+//   .then(response => {
+//     console.log(response.data);
+//   })
+//   .catch(error => {
+//     console.log(error);
+//   });
+
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}`);
 });

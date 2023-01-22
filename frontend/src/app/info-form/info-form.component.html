@@ -1,9 +1,9 @@
 <!-- a form that will take in information about the user -->
 
-<span class="display-4" *ngIf="auth.user$ | async as user">Welcome {{ user.name }}</span>
 
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()" novalidate class="col-3 mx-auto border border-danger border-3 rounded-5 p-4 mt-5 ">
-
+    
+    <span class="lead" *ngIf="auth.user$ | async as user">Welcome {{ user.name }}</span><br>
     <label for="hourlyIncome">Hourly Income</label>
     <input type="text" id="hourlyIncome"   placeholder="jm@acme.com" class="form-control" formControlName="hourlyIncome">
     <div *ngIf="userForm.controls['hourlyIncome'].invalid && (userForm.controls['hourlyIncome'].dirty || userForm.controls['hourlyIncome'].touched)" class="alert">
