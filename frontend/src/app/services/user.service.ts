@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
+import { WebRequestService } from './web-request.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor() { }
+  constructor(private webRequestService: WebRequestService) { }
 
-  updateInformation(): void {
-    
+  // this.webRequestService.patch('', null);
+  
+  test() {
+    console.log("Testing...");
+    return this.webRequestService.test();
   }
 }

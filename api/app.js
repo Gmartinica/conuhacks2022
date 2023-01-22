@@ -15,11 +15,17 @@ const config = {
   issuerBaseURL: 'https://dev-xdt1fatydo2dxxcl.us.auth0.com'
 };
 
-// auth router attaches /login, /logout, and /callback routes to the baseURL
+// load middleware
 app.use(auth(config));
 
-// req.isAuthenticated is provided from the auth router
-app.get('/', (req, res) => {
+// CORS middleware
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
+app.get('/user', (req, res) => {
     res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
     var userID = req.oidc.user.sub;
     var options = { method: 'GET',
@@ -30,9 +36,10 @@ app.get('/', (req, res) => {
         }
     };
     axios.request(options).then(function (response) {
-        console.log(response.data);
+        return (response.data);
     }).catch(function (error) {
         console.error(error);
+        return null
     });
 });
 
@@ -40,18 +47,15 @@ app.listen(port, () => {
     console.log(`Server is listening on port ${port}`);
 });
 
-const { requiresAuth } = require('express-openid-connect');
+// const { requiresAuth } = require('express-openid-connect');
+// app.patch('/patch', requiresAuth(), (req, res) => {
+//     res.send(JSON.stringify(req.oidc.user));
+// });
 
-app.get('/profile', requiresAuth(), (req, res) => {
-    res.send(JSON.stringify(req.oidc.user));
+// app.get('/profile', requiresAuth(), (req, res) => {
+//     res.send(JSON.stringify(req.oidc.user));
+// });
+
+app.get("/", (req, res) => {
+    res.send("Hello World");
 });
-
-
-
-// app.get("/", (req, res) => {
-//     res.send("Hello World!");
-// });
-
-// app.post("/", (req, res) => {
-//     res.send("Hello World!");
-// });
