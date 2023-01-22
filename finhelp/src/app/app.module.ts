@@ -11,6 +11,9 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { HomeComponent } from './home/home.component';
 import { StatsComponent } from './stats/stats.component';
 
+
+
+
 @NgModule({
   declarations: [
     AppComponent,

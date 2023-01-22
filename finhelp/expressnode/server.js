@@ -45,9 +45,6 @@ app.post("/create", function (req, res) {
   user = {
     name: req.query.name,
 
-app.get('/create',function(req, res)
-{
-  response = {
     firstName:req.query.firstName,
 
     lastName:req.query.lastName,
