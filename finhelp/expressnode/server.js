@@ -5,8 +5,9 @@ app.get('/index.html', function(req, res){
   res.sendFile( __dirname + "/" + "index.htm1" );
 })
 
-app.get('/create',function(req, res)
+app.post('/create',function(req, res)
 {
+  console.log(req);
   response = {
     firstName:req.query.firstName,
 
