@@ -1,3 +1,5 @@
+
+import { AuthService } from '@auth0/auth0-angular';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-
+  constructor(public auth: AuthService) {}
 }
