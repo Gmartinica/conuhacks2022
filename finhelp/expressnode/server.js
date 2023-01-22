@@ -28,7 +28,13 @@ app.get("/index.html", function (req, res) {
   );
 });
 
-app.post("/", function (req, res) {
+app.get("/create", function (req, res) {
+  console.log('req');
+});
+
+app.post("/create", function (req, res) {
+
+  console.log(req.body);
   response = {
     firstName: req.query.firstName,
 
